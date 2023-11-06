@@ -67,8 +67,8 @@ layout = html.Div(id='parent', children=[
     dcc.Input(id='Bn', style={'display': 'none'}, type='number', placeholder='Initial Bn'),
     dcc.Input(id='Ad', style={'display': 'none'}, type='number', placeholder='Initial Ad'),
     dcc.Input(id='Bd', style={'display': 'none'}, type='number', placeholder='Initial Bd'),
-    dcc.Input(id='dS', style={'display': 'none'}, type='number', placeholder='Initial dS'),
-    dcc.Input(id='dH', style={'display': 'none'}, type='number', placeholder='Initial dH'),
+    dcc.Input(id='dS', style={'display': 'none'}, type='number', placeholder='Initial ΔS'),
+    dcc.Input(id='dH', style={'display': 'none'}, type='number', placeholder='Initial ΔH'),
 
     html.Button('Fit data', id='fit', n_clicks=0, style={'display': 'none'}),
 
@@ -141,10 +141,10 @@ def plot_data(contents, filename, convert, C, P, files, clicks, An, Bn, Ad, Bd, 
                                                                                              <br>Bn = {par[1]:.3} +- {perr[1]:.3}\
                                                                                              <br>Ad = {par[2]:.3} +- {perr[2]:.3}\
                                                                                              <br>Bd = {par[3]:.3} +- {perr[3]:.3}\
-                                                                                             <br>dS = {par[4]:.3} +- {perr[4]:.3}\
-                                                                                             <br>dH = {par[5]:.3} +- {perr[5]:.3}\
-                                                                                             <br>r2 = {r2:.3}\
-                                                                                             <br>tm = {par[5] / par[4] - 273:.3}')
+                                                                                             <br>ΔS = {par[4]:.3} +- {perr[4]:.3}\
+                                                                                             <br>ΔH = {par[5]:.3} +- {perr[5]:.3}\
+                                                                                             <br>R<sup>2</sup> = {r2:.3}\
+                                                                                             <br>T<sub>m</sub> = {par[5] / par[4] - 273:.3}')
                         , row=1, col=1)
                 except Exception as e:
                     message = f'There was an error: {e}'
@@ -154,7 +154,9 @@ def plot_data(contents, filename, convert, C, P, files, clicks, An, Bn, Ad, Bd, 
 
             if x.max() <= 100 and convert:
                 fig['layout']['xaxis2']['title'] = '°C'
-                fig['layout']['yaxis1']['title'] = 'MRE'
+                fig['layout']['yaxis1']['title'] = "θ<sub>MRE</sub>*10<sup>-3</sup>(deg*cm<sup>2</sup>dmol<sup>-1</sup>"
+
+
 
             elif x.max() <= 100 and not convert:
                 fig['layout']['xaxis2']['title'] = '°C'
@@ -162,7 +164,7 @@ def plot_data(contents, filename, convert, C, P, files, clicks, An, Bn, Ad, Bd, 
 
             elif x.max() >= 100 and convert:
                 fig['layout']['xaxis2']['title'] = 'λ'
-                fig['layout']['yaxis1']['title'] = 'MRE'
+                fig['layout']['yaxis1']['title'] = "θ<sub>MRE</sub>*10<sup>-3</sup>(deg*cm<sup>2</sup>dmol<sup>-1</sup>"
                 fig.add_hline(y=0, row=1, col=1)
 
             elif x.max() >= 100 and not convert:

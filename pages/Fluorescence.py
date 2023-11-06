@@ -138,7 +138,7 @@ layout = html.Div(id='parent', children=[
                     dcc.Input(id='m_guess', type='number', placeholder='initial guess',
                               style={'display': 'inline-block', 'border': '1px solid black'}),
                     html.Br(),
-                    html.H5('U: ',
+                    html.H5(['D',html.Sub('50%'),': '],
                             style={'display': 'inline-block', 'margin-left': 30, 'margin-right': 30, 'width': '100px'}),
                     dcc.Input(id='U_guess', type='number', placeholder='initial guess',
                               style={'display': 'inline-block', 'border': '1px solid black'}),
@@ -168,7 +168,7 @@ layout = html.Div(id='parent', children=[
 
 
 @callback(Output('modalbody', 'children'),
-          # Only updates when new files are upoaded. Not when button is clicked. Very usefull for the storage of Inputs #//TODO fix modal name
+          # Only updates when new files are upoaded. Not when button is clicked. Very usefull for the storage of Inputs
           [Input('upload-data', 'contents'), Input('upload-data', 'filename')], config_prevent_initial_callbacks=True)
 def update_modal_with_files(content, filename):  # Renders the layout for the modal.
 
@@ -261,7 +261,6 @@ def plot_fluorescence(content, active_tab, concentrations, slider_value, fit_clo
     fig = make_subplots(rows=1, cols=1)
 
     style = {'display': 'none'}
-    print(fit_parameters)
     I_max = data[0][
         'I'].max()  # Messy, but need to define values for slider outside of choice of tab, because changing tab initiates the update of the slider values
     slider_initial_nm = data[0].loc[data[0]['I'] == float(I_max)]['nM']
@@ -342,8 +341,8 @@ def plot_fluorescence(content, active_tab, concentrations, slider_value, fit_clo
                                     <br>Fd = {par[2]:.3} +- {perr[2]:.3}\
                                     <br>Ad = {par[3]:.3} +- {perr[3]:.3}\
                                     <br>m = {par[4]:.3} +- {perr[4]:.3}\
-                                    <br>U = {par[5]:.3} +- {perr[5]:.3}\
-                                    <br>r2 = {r2:.3}')
+                                    <br>D<sub>50%</sub> = {par[5]:.3} +- {perr[5]:.3}\
+                                    <br>R<sup>2</sup> = {r2:.3}')
 
                 )
 
@@ -408,7 +407,7 @@ def plot_fluorescence(content, active_tab, concentrations, slider_value, fit_clo
                                     <br>U = {par[5]:.3} +- {perr[5]:.3}\
                                     <br>r2 = {r2:.3}')
                 )
-                print(perr)
+
 
 
             except Exception as e:
