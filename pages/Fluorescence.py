@@ -279,7 +279,7 @@ def plot_fluorescence(content, active_tab, concentrations, slider_value, fit_clo
         for i in range(0, len(data)):
             fig.add_trace(go.Scatter(x=data[i]['nM'], y=data[i]['I'], name=concentrations[i]), row=1, col=1)
 
-        fig['layout']['xaxis']['title'] = 'λ'
+        fig['layout']['xaxis']['title'] = 'λ<sub>(nm)</sub>'
         fig['layout']['yaxis']['title'] = 'I'
 
     ### WAVELENGTH PLOTTER. CURRENTLY TAKES THE NM WITH MAX INT FOR FILE 0 AND PLOTS FOR ALL
@@ -293,7 +293,7 @@ def plot_fluorescence(content, active_tab, concentrations, slider_value, fit_clo
             y.append(I_at_nM)
         fig.add_trace(go.Scatter(x=concentrations, y=y, name='Data', mode='markers'), row=1, col=1)
         fig['layout']['xaxis']['title'] = 'Concentration'
-        fig['layout']['yaxis']['title'] = f'I{nm} nm'
+        fig['layout']['yaxis']['title'] = f'I<sub>{nm} nm</sub>'
 
         style = {'display': 'block', 'transform': 'scale(1)'}
 
@@ -314,7 +314,7 @@ def plot_fluorescence(content, active_tab, concentrations, slider_value, fit_clo
                     go.Scatter(x=np.array(sorted_x), y=y_pred, mode='lines', line={'width':1,'dash':'dash'},
                                name=f'Kd = {par[0]:.3} +- {perr[0]:.3} µM\
                                <br>yf = {par[2]:.3} +- {perr[2]:.3} µM\
-                               <br>r2 = {r2:.3}')
+                               <br>R<sup>2</sup> = {r2:.3}')
 
                 )
 
@@ -340,7 +340,7 @@ def plot_fluorescence(content, active_tab, concentrations, slider_value, fit_clo
                                     <br>An = {par[1]:.3} +- {perr[1]:.3}\
                                     <br>Fd = {par[2]:.3} +- {perr[2]:.3}\
                                     <br>Ad = {par[3]:.3} +- {perr[3]:.3}\
-                                    <br>m = {par[4]:.3} +- {perr[4]:.3}\
+                                    <br>m = {par[4]:.3} +- {perr[4]:.3} Kcal*mol<sup>-1</sup>*M<sup>-1</sup>\
                                     <br>D<sub>50%</sub> = {par[5]:.3} +- {perr[5]:.3}\
                                     <br>R<sup>2</sup> = {r2:.3}')
 
@@ -360,7 +360,7 @@ def plot_fluorescence(content, active_tab, concentrations, slider_value, fit_clo
         fig.add_trace(go.Scatter(x=concentrations, y=y, mode='markers', name='data'), row=1, col=1)
 
         fig['layout']['xaxis']['title'] = 'Concentration'
-        fig['layout']['yaxis']['title'] = 'λmax'
+        fig['layout']['yaxis']['title'] = 'λmax<sub>(nm)</sub>'
 
         ### START OF FITTING
         sorted_data = list(zip(concentrations, y))
@@ -379,7 +379,7 @@ def plot_fluorescence(content, active_tab, concentrations, slider_value, fit_clo
                     go.Scatter(x=np.array(sorted_x), y=y_pred, mode='lines', line={'width': 1, 'dash': 'dash'},
                                name=f'Kd = {par[0]:.3} +- {perr[0]:.3} µM\
                                 <br>yf = {par[2]:.3} +- {perr[2]:.3} µM\
-                                <br>r2 = {r2:.3}')
+                                <br>R<sup>2</sup> = {r2:.3}')
                 )
 
             except Exception as e:
@@ -403,9 +403,9 @@ def plot_fluorescence(content, active_tab, concentrations, slider_value, fit_clo
                                     <br>An = {par[1]:.3} +- {perr[1]:.3}\
                                     <br>Fd = {par[2]:.3} +- {perr[2]:.3}\
                                     <br>Ad = {par[3]:.3} +- {perr[3]:.3}\
-                                    <br>m = {par[4]:.3} +- {perr[4]:.3}\
-                                    <br>U = {par[5]:.3} +- {perr[5]:.3}\
-                                    <br>r2 = {r2:.3}')
+                                    <br>m = {par[4]:.3} +- {perr[4]:.3} Kcal*mol<sup>-1</sup>*M<sup>-1</sup>\
+                                    <br>D<sub>50%</sub> = {par[5]:.3} +- {perr[5]:.3}\
+                                    <br>R<sup>2</sup> = {r2:.3}')
                 )
 
 

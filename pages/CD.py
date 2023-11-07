@@ -141,10 +141,10 @@ def plot_data(contents, filename, convert, C, P, files, clicks, An, Bn, Ad, Bd, 
                                                                                              <br>Bn = {par[1]:.3} +- {perr[1]:.3}\
                                                                                              <br>Ad = {par[2]:.3} +- {perr[2]:.3}\
                                                                                              <br>Bd = {par[3]:.3} +- {perr[3]:.3}\
-                                                                                             <br>ΔS = {par[4]:.3} +- {perr[4]:.3}\
-                                                                                             <br>ΔH = {par[5]:.3} +- {perr[5]:.3}\
+                                                                                             <br>ΔS = {par[4]:.3} +- {perr[4]:.3} J*K<sup>-1</sup>mol<sup>-1</sup>\
+                                                                                             <br>ΔH = {par[5]:.3} +- {perr[5]:.3} Kj*mol<sup>-1</sup>\
                                                                                              <br>R<sup>2</sup> = {r2:.3}\
-                                                                                             <br>T<sub>m</sub> = {par[5] / par[4] - 273:.3}')
+                                                                                             <br>T<sub>m</sub> = {par[5] / par[4] - 273:.3} °C')
                         , row=1, col=1)
                 except Exception as e:
                     message = f'There was an error: {e}'
@@ -160,23 +160,23 @@ def plot_data(contents, filename, convert, C, P, files, clicks, An, Bn, Ad, Bd, 
 
             elif x.max() <= 100 and not convert:
                 fig['layout']['xaxis2']['title'] = '°C'
-                fig['layout']['yaxis1']['title'] = 'Elipticity'
+                fig['layout']['yaxis1']['title'] = 'θ'
 
             elif x.max() >= 100 and convert:
-                fig['layout']['xaxis2']['title'] = 'λ'
+                fig['layout']['xaxis2']['title'] = 'λ<sub>(nm)</sup>'
                 fig['layout']['yaxis1']['title'] = "θ<sub>MRE</sub>*10<sup>-3</sup>(deg*cm<sup>2</sup>dmol<sup>-1</sup>"
-                fig.add_hline(y=0, row=1, col=1)
+                fig.add_hline(y=0, row=1, col=1,line_dash="dash")
 
             elif x.max() >= 100 and not convert:
-                fig['layout']['xaxis2']['title'] = 'λ'
-                fig['layout']['yaxis1']['title'] = 'Elipticity'
-                fig.add_hline(y=0, row=1, col=1)
+                fig['layout']['xaxis2']['title'] = 'λ<sub>(nm)</sup>'
+                fig['layout']['yaxis1']['title'] = 'θ'
+                fig.add_hline(y=0, row=1, col=1,line_dash="dash")
             else:
                 pass  # Pass on x / y labels. Incase something goes wrong
         else:
             pass  # Pass on if no matches between selected files and filenames
 
-    fig['layout']['yaxis2']['title'] = 'Saturation'  # Update all axis with this
+    fig['layout']['yaxis2']['title'] = 'HT Voltage'  # Update all axis with this
 
     fig.update_layout(showlegend=True)
     return [fig, None, message]
