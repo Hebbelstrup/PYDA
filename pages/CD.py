@@ -63,6 +63,7 @@ layout = html.Div(id='parent', children=[
 
     dcc.Graph(id='line_plot',config=config),
 
+    html.P(id='Initial_guess_note',style={'display':'none'},children='Fill in all initial parameter guesses, then click "fit data"'),
     dcc.Input(id='An', style={'display': 'none'}, type='number', placeholder='Initial An'),
     dcc.Input(id='Bn', style={'display': 'none'}, type='number', placeholder='Initial Bn'),
     dcc.Input(id='Ad', style={'display': 'none'}, type='number', placeholder='Initial Ad'),
@@ -194,11 +195,12 @@ def update_file_select(filenames):
 ###### START OF FITTING #######
 
 @callback(Output('An', 'style'), Output('Bn', 'style'), Output('Ad', 'style'), Output('Bd', 'style'),
-              Output('dS', 'style'), Output('dH', 'style'), Output('fit', 'style'),
+              Output('dS', 'style'), Output('dH', 'style'), Output('fit', 'style'), Output('Initial_guess_note','style'),
               [Input('checklist', 'value')], prevent_initial_call=True)
 def show_fit_parameters(selected_files):
     if len(selected_files) > 1:
         return [{'display': 'none'},
+                {'display': 'none'},
                 {'display': 'none'},
                 {'display': 'none'},
                 {'display': 'none'},
@@ -213,7 +215,8 @@ def show_fit_parameters(selected_files):
                 {'display': 'block'},
                 {'display': 'block'},
                 {'display': 'block'},
-                {'width': '154px', 'height': '30px', 'marginTop': 5}]
+                {'width': '154px', 'height': '30px', 'marginTop': 5},
+                {'display': 'block'}]
 
 
 

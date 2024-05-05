@@ -112,6 +112,7 @@ layout = html.Div(id='parent', children=[
             dbc.ModalHeader(dbc.ModalTitle("Fitting"), className="mx-auto"),
             dbc.ModalBody(children=[
                 html.Div([
+                    html.H5('Fill in all initial parameter guesses for either binding or unfolding before clicking "Close & Save"',style={'textAlign':'center'}),
                     html.H2('Unfolding', style={'textAlign': 'center', 'margin-left': 50}),
                     html.H5('Fn: ',
                             style={'display': 'inline-block', 'margin-left': 30, 'margin-right': 30, 'width': '100px'}),
