@@ -24,6 +24,12 @@ def parse_contents(contents, filename):
     file = io.StringIO(decoded.decode('utf-8'))
 
     data = pd.read_csv(file, sep="\n|\\t", names=['λ', 'Elip', 'Sat'], decimal=',', engine="python")
+    if data['Elip'].isna().any():
+
+        num_rows = len(data['Elip'])
+        data['Sat'] = [0] * num_rows
+    print(data)
+
     df = pd.DataFrame(data)
     df = df[20:df.loc[df['λ'].str.startswith('#####')].index[0]].astype('float')
     df = df.loc[(df['Sat'] <= 700)]
@@ -178,7 +184,8 @@ def plot_data(contents, filename, convert, C, P, files, clicks, An, Bn, Ad, Bd, 
             pass  # Pass on if no matches between selected files and filenames
 
     fig['layout']['yaxis2']['title'] = 'HT Voltage'  # Update all axis with this
-
+    if (df['Sat'] == 0).any():
+        fig['layout']['yaxis2']['title'] = 'No HT available'
     fig.update_layout(showlegend=True)
     return [fig, None, message]
 
