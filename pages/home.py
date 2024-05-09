@@ -6,7 +6,8 @@ dash.register_page(__name__,title='Home')
 tool_tip_text = "This Dashboard is designed to be used with data generated in the course 'Protein science'. \n" \
                 "Examples of accepted files and formats can be found under 'files'. \n" \
                 "More information on fits can be found in \n " \
-                "Lindorff-Larsen, K & Teilum, K 'Linking thermodynamics and measurements of protein stability, 2021' "
+                "Lindorff-Larsen, K & Teilum, K 'Linking thermodynamics and measurements of protein stability, 2021'\n" \
+                "And Woody, R W 'Circular dichroism, 1995 "
 layout = html.Div(children=[
 
         dbc.Tooltip(tool_tip_text,
